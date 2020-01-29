@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
@@ -44,6 +46,7 @@ public class Duke {
                     }
                     Task toDelete = tasks.get(idx);
                     tasks.remove(idx);
+                    writeToFile();
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(toDelete);
                     System.out.println("Now you have " + tasks.size()
@@ -59,6 +62,7 @@ public class Duke {
                         throw new InvalidIndexException(message);
                     }
                     tasks.get(idx).setDone();
+                    writeToFile();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(tasks.get(idx));
                 } else if (input.split(" ")[0].equals("todo")) {
@@ -69,6 +73,7 @@ public class Duke {
                     Task task = new Task(input);
                     tasks.add(task);
                     addTask(task);
+                    writeToFile();
                 } else if (input.split(" ")[0].equals("deadline")) {
                     input = input.substring(input.split(" ")[0].length() + 1, input.length()).trim();
                     if (input.split("/by").length == 0) {
@@ -88,11 +93,12 @@ public class Duke {
                                     "Format: description /by time");
                         }
                     }
-                    String name = input.split(" /by")[0];
-                    String time = input.split(" /by")[1];
+                    String name = input.split(" /by")[0].trim();
+                    String time = input.split(" /by")[1].trim();
                     Deadline deadline = new Deadline(name, time);
                     tasks.add(deadline);
                     addTask(deadline);
+                    writeToFile();
                 } else if (input.split(" ")[0].equals("event")) {
                     input = input.substring(input.split(" ")[0].length() + 1, input.length()).trim();
                     if (input.split("/at").length == 0) {
@@ -116,6 +122,7 @@ public class Duke {
                     Event event = new Event(name, time);
                     tasks.add(event);
                     addTask(event);
+                    writeToFile();
                 } else {
                     throw new InvalidInputException();
                 }
@@ -131,8 +138,37 @@ public class Duke {
                 System.out.println(e);
             } catch (InvalidEventException e) {
                 System.out.println(e);
+            } catch (IOException e) {
+                continue;
             }
         }
+    }
+
+    private static void writeToFile() throws IOException {
+        String path = "../../../data/duke.txt";
+        FileWriter fw = new FileWriter(path);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task curr = tasks.get(i);
+            if (curr instanceof Deadline) {
+                fw.write("D | ");
+                fw.write((curr.getStatus() ? "1" : "0") + " | ");
+                fw.write(curr.getDescriptionWithoutIcon() + " | ");
+                fw.write(((Deadline) curr).getDeadline().trim());
+            } else if (curr instanceof Event) {
+                fw.write("E | ");
+                fw.write((curr.getStatus() ? "1" : "0") + " | ");
+                fw.write(curr.getDescriptionWithoutIcon() + " | ");
+                fw.write(((Event) curr).getTime().trim());
+            } else {
+                fw.write("T | ");
+                fw.write((curr.getStatus() ? "1" : "0") + " | ");
+                fw.write(curr.getDescriptionWithoutIcon());
+            }
+            if (i != tasks.size() - 1) {
+                fw.write(System.lineSeparator());
+            }
+        }
+        fw.close();
     }
 
     static void addDeadline(Deadline deadline) {
