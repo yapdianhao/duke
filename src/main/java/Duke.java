@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
 
@@ -62,9 +64,9 @@ public class Duke {
                         throw new InvalidIndexException(message);
                     }
                     tasks.get(idx).setDone();
-                    writeToFile();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(tasks.get(idx));
+                    writeToFile();
                 } else if (input.split(" ")[0].equals("todo")) {
                     if (input.split(" ").length < 2) {
                         throw new InvalidTodoException();
@@ -87,7 +89,7 @@ public class Duke {
                             throw new InvalidEventException("OOPS! The time is missing. " +
                                     "Format: description /by time");
                         }
-                    }else if (input.split("/by").length == 2) {
+                    } else if (input.split("/by").length == 2) {
                         if (input.split("/by")[0].equals("")) {
                             throw new InvalidDeadlineException("OOPS! The description is missing. " +
                                     "Format: description /by time");
@@ -95,9 +97,16 @@ public class Duke {
                     }
                     String name = input.split(" /by")[0].trim();
                     String time = input.split(" /by")[1].trim();
-                    Deadline deadline = new Deadline(name, time);
-                    tasks.add(deadline);
-                    addTask(deadline);
+                    if (isValidDate(time)) {
+                        LocalDate todoDate = LocalDate.parse(time);
+                        Deadline deadline = new Deadline(name, todoDate);
+                        tasks.add(deadline);
+                        addDeadline(deadline);
+                    } else {
+                        Deadline deadline = new Deadline(name, time);
+                        tasks.add(deadline);
+                        addDeadline(deadline);
+                    }
                     writeToFile();
                 } else if (input.split(" ")[0].equals("event")) {
                     input = input.substring(input.split(" ")[0].length() + 1, input.length()).trim();
@@ -123,6 +132,7 @@ public class Duke {
                     tasks.add(event);
                     addTask(event);
                     writeToFile();
+                    addEvent(event);
                 } else {
                     throw new InvalidInputException();
                 }
@@ -139,6 +149,7 @@ public class Duke {
             } catch (InvalidEventException e) {
                 System.out.println(e);
             } catch (IOException e) {
+            } catch (DateTimeParseException e) {
                 continue;
             }
         }
@@ -171,23 +182,32 @@ public class Duke {
         fw.close();
     }
 
+    static boolean isValidDate(String str) {
+        try {
+            LocalDate.parse(str);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
+    }
+
     static void addDeadline(Deadline deadline) {
         System.out.println("Got it. I've added this task:");
         System.out.println(deadline);
         System.out.println("Now you have " + tasks.size()
-                + (tasks.size() > 1 ? "tasks" : "task") + " in the list");
+                + (tasks.size() > 1 ? " tasks" : " task") + " in the list");
     }
 
     static void addEvent(Event event) {
         System.out.println("Got it. I've added this task:");
         System.out.println(event);
         System.out.println("Now you have " + tasks.size()
-                + (tasks.size() > 1 ? "tasks" : "task") + " in the list");
+                + (tasks.size() > 1 ? " tasks" : " task") + " in the list");
     }
     static void addTask(Task task) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println("Now you have " + tasks.size()
-                + " " + (tasks.size() > 1 ? "tasks" : "task") + " in the list");
+                + (tasks.size() > 1 ? " tasks" : " task") + " in the list");
     }
 }
