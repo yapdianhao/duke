@@ -126,13 +126,19 @@ public class Duke {
                             throw new InvalidEventException("OOPS! The description is missing.");
                         }
                     }
-                    String name = input.split(" /at")[0];
-                    String time = input.split(" /at")[1];
-                    Event event = new Event(name, time);
-                    tasks.add(event);
-                    addTask(event);
+                    String name = input.split(" /at")[0].trim();
+                    String time = input.split(" /at")[1].trim();
+                    if (isValidDate(time)) {
+                        LocalDate todoDate = LocalDate.parse(time);
+                        Event event = new Event(name, todoDate);
+                        tasks.add(event);
+                        addEvent(event);
+                    } else {
+                        Event event = new Event(name, time);
+                        tasks.add(event);
+                        addEvent(event);
+                    }
                     writeToFile();
-                    addEvent(event);
                 } else {
                     throw new InvalidInputException();
                 }

@@ -1,24 +1,23 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
 public class Deadline extends Task {
+
     protected String by = "";
     protected LocalDate todoDate;
-
 
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
     }
 
-    public String getDeadline() {
-        return this.by;
-    }
-
     public Deadline(String description, LocalDate todoDate) {
         super(description);
         this.todoDate = todoDate;
+    }
+
+    public String getDeadline() {
+        return this.by;
     }
 
     @Override
