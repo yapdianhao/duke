@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
 
@@ -89,10 +92,19 @@ public class Duke {
                         }
                     }
                     String name = input.split(" /by")[0];
-                    String time = input.split(" /by")[1];
-                    Deadline deadline = new Deadline(name, time);
-                    tasks.add(deadline);
-                    addTask(deadline);
+                    String time = input.split(" /by")[1].trim();
+                    System.out.println(time);
+                    if (isValidDate(time)) {
+                        LocalDate todoDate = LocalDate.parse(time);
+                        Deadline deadline = new Deadline(name, todoDate);
+                        tasks.add(deadline);
+                        addDeadline(deadline);
+                    } else {
+                        Deadline deadline = new Deadline(name, time);
+                        tasks.add(deadline);
+                        System.out.println("debug: " + deadline);
+                        addDeadline(deadline);
+                    }
                 } else if (input.split(" ")[0].equals("event")) {
                     input = input.substring(input.split(" ")[0].length() + 1, input.length()).trim();
                     if (input.split("/at").length == 0) {
@@ -115,7 +127,7 @@ public class Duke {
                     String time = input.split(" /at")[1];
                     Event event = new Event(name, time);
                     tasks.add(event);
-                    addTask(event);
+                    addEvent(event);
                 } else {
                     throw new InvalidInputException();
                 }
@@ -131,27 +143,39 @@ public class Duke {
                 System.out.println(e);
             } catch (InvalidEventException e) {
                 System.out.println(e);
+            } catch (DateTimeParseException e) {
+                continue;
             }
         }
+    }
+
+    static boolean isValidDate(String str) {
+        //LocalDate now = LocalDate.now();
+        try {
+            LocalDate.parse(str);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 
     static void addDeadline(Deadline deadline) {
         System.out.println("Got it. I've added this task:");
         System.out.println(deadline);
         System.out.println("Now you have " + tasks.size()
-                + (tasks.size() > 1 ? "tasks" : "task") + " in the list");
+                + (tasks.size() > 1 ? " tasks" : " task") + " in the list");
     }
 
     static void addEvent(Event event) {
         System.out.println("Got it. I've added this task:");
         System.out.println(event);
         System.out.println("Now you have " + tasks.size()
-                + (tasks.size() > 1 ? "tasks" : "task") + " in the list");
+                + (tasks.size() > 1 ? " tasks" : " task") + " in the list");
     }
     static void addTask(Task task) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println("Now you have " + tasks.size()
-                + " " + (tasks.size() > 1 ? "tasks" : "task") + " in the list");
+                + (tasks.size() > 1 ? " tasks" : " task") + " in the list");
     }
 }
