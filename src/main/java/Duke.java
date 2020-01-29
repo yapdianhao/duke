@@ -36,6 +36,21 @@ public class Duke {
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println((i + 1) + "." + tasks.get(i));
                     }
+                } else if (input.split(" ")[0].equals("find")) {
+                    if (input.split(" ").length < 2) {
+                        throw new InsufficientInputException();
+                    }
+                    String key = input.split(" ")[1].trim();
+                    List<Task> filteredTasks = new ArrayList<>();
+                    for (Task task : tasks) {
+                        if (task.getDescriptionWithoutIcon().contains(key)) {
+                            filteredTasks.add(task);
+                        }
+                    }
+                    System.out.println("Here are the matching tasks in your list:");
+                    for (int i = 0; i < filteredTasks.size(); i++) {
+                        System.out.println((i + 1) + "." + tasks.get(i));
+                    }
                 } else if (input.split(" ")[0].equals("delete")) {
                     if (input.split(" ").length < 2) {
                         throw new InsufficientInputException();
