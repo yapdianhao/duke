@@ -1,7 +1,9 @@
-import java.util.Scanner;
-import java.util.List;
+package duke;
 
-class Ui {
+import java.util.Scanner;
+
+
+public class Ui {
 
     private Scanner sc;
     private Parser parser;

@@ -1,3 +1,5 @@
+package duke;
+
 public class InsufficientInputException extends DukeException {
 
     public String toString() {

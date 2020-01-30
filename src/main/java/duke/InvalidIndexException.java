@@ -1,8 +1,10 @@
-public class InvalidEventException extends DukeException {
+package duke;
+
+public class InvalidIndexException extends DukeException {
 
     String message;
 
-    public InvalidEventException(String message) {
+    public InvalidIndexException(String message) {
         this.message = message;
     }
 

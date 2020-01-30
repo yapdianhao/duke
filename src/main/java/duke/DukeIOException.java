@@ -1,3 +1,5 @@
+package duke;
+
 class DukeIOException extends DukeException {
 
     public String toString() {
