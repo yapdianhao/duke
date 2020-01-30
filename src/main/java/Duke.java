@@ -18,10 +18,11 @@ public class Duke {
 
     public void run() {
         ui.start(this.taskList);
+        storage.write(this.taskList.getAllTasks());
         ui.end();
     }
 
     public static void main(String[] args) {
-        new Duke("../../../data/duke.txt").run();
+        new Duke("data/duke.txt").run();
     }
 }

@@ -1,3 +1,2 @@
-T | 0 | code
-D | 1 | submit | 1159
-D | 1 | NOC | 
+T | 0 | sleep
+E | 0 | apply NOC | 

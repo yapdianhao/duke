@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private String path;
+    static private String path;
 
     public Storage(String path) {
         this.path = path;
@@ -32,9 +32,9 @@ public class Storage {
         }
     }
 
-    public void write(List<Task> toStore) {
+    public static void write(List<Task> toStore) {
         try {
-            FileWriter fw = new FileWriter(this.path);
+            FileWriter fw = new FileWriter(path);
             for (int i = 0; i < toStore.size(); i++) {
                 Task curr = toStore.get(i);
                 if (curr instanceof Deadline) {
@@ -58,7 +58,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("OOPS! An error occurred while writing the file.");
+            System.out.println(e);
         }
     }
 }

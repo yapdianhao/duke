@@ -89,4 +89,8 @@ public class TaskList {
                     + " " + (this.tasks.size() > 1 ? "tasks" : "task") + " in the list");
         return res;
     }
+
+    public List<Task> getAllTasks() {
+        return this.tasks;
+    }
 }
