@@ -1,0 +1,3 @@
+class DukeTerminateException extends DukeException {
+
+}
