@@ -2,17 +2,35 @@ package duke;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Stores a temporary list of current tasks of the user. TaskList is able to perform various
+ * operations, such as adding, updating, deleting, and even show all of them.
+ */
 public class TaskList {
     private List<Task> tasks;
 
+    /**
+     * Constructor. Starts with an empty list, if no previous tasks is left by
+     * the user.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Overriding constructor. If the user has any leftover incomplete tasks, includes them
+     * for every operations later.
+     * @param tasks The previous incomplete list of tasks by the user.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Adds a task to the current list.
+     * @param task The current task that needs to be added into the list.
+     * @return An output specifying how many tasks the user has, after the adding.
+     */
     public String addTask (Task task) {
         this.tasks.add(task);
         String res = "Got it. I've added this task:" + "\n";
@@ -22,6 +40,11 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Adds a deadline to the current list.
+     * @param deadline The deadline that needs to be added into the list.
+     * @return An output specifying how many tasks the user has, after the adding.
+     */
     public String addDeadline(Deadline deadline) {
         this.tasks.add(deadline);
         String res = "Got it. I've added this deadline:" + "\n";
@@ -31,6 +54,11 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Adds an event to the current list.
+     * @param event The event that needs to be added into the list.
+     * @return An output specifying how many tasks the user has, after the adding.
+     */
     public String addEvent(Event event) {
         this.tasks.add(event);
         String res = "Got it. I've added this deadline:" + "\n";
@@ -40,6 +68,10 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Shows all the tasks, including those that are done or incomplete, to the user.
+     * @return A string that includes every task.
+     */
     public String list() {
         String res = "";
         for (int i = 0; i < this.tasks.size(); i++) {
@@ -51,6 +83,11 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Finds the task with a keyword requested by the user.
+     * @param key The keyword the user wants to search with.
+     * @return A string that includes all the tasks with the entered keyword.
+     */
     public String find(String key) {
         String res = "Here are the matching tasks in your list:" + "\n";
         List<Task> filteredTasks = new ArrayList<>();
@@ -65,8 +102,19 @@ public class TaskList {
         return res;
     }
 
-    public String done(int idx) {
+    /**
+     * Marks a certain task as done upon completion.
+     * @param idx The index of the task that needs to be marked done.
+     * @return A string that shows the status of the updated task.
+     * @throws InvalidIndexException incorrect index, i.e. a negative number.
+     */
+    public String done(int idx) throws InvalidIndexException {
         String res = "";
+        if (idx < 0 || idx >= tasks.size()) {
+            String message = "OOPS! Invalid task number. You only have " + this.tasks.size()
+                    + (this.tasks.size() > 1 ? " tasks" : " task") + " in the list";
+            throw new InvalidIndexException(message);
+        }
         Task curr = this.tasks.get(idx);
         curr.setDone();
         res += "Nice! I've marked this task as done:" + "\n";
@@ -74,6 +122,12 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Removes a task from the list as requested by the user.
+     * @param idx The index of the task that needs to be removed.
+     * @return A string denotes the number of tasks the user have after the deletion.
+     * @throws InvalidIndexException incorrect index, i.e. a large number when tasks are only a few.
+     */
     public String delete(int idx) throws InvalidIndexException {
         String res = "";
         if (idx < 0 || idx >= tasks.size()) {
@@ -90,6 +144,10 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * A getter method to access the list by the TaskList class.
+     * @return A list of all the tasks.
+     */
     public List<Task> getAllTasks() {
         return this.tasks;
     }
