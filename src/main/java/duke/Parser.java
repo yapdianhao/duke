@@ -13,7 +13,6 @@ public class Parser {
      * agent to perform the processing of inputs, just with pure logic.
      */
     public Parser() {
-
     }
 
     /**
