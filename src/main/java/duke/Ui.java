@@ -31,6 +31,7 @@ public class Ui {
      * @param taskList
      */
     public void start(TaskList taskList) {
+        showLine();
         while (true){
             try {
                 String command = sc.nextLine().trim();

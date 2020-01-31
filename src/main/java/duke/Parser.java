@@ -163,7 +163,6 @@ public class Parser {
                 }
                 break;
             case "D":
-                System.out.println("Parser 166: " + Arrays.toString(split));
                 String deadlineTime = split[3];
                 String deadlineDescription = split[2];
                 int deadlineStatus = Integer.parseInt(split[1]);

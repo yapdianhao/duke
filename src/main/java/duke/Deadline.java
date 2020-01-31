@@ -36,7 +36,10 @@ public class Deadline extends Task {
      * @return A string that represents a time.
      */
     public String getDeadline() {
-        return this.by;
+        if (!this.by.equals("")) {
+            return this.by;
+        }
+        return this.todoDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**
