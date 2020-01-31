@@ -56,12 +56,12 @@ public class Storage {
                     fw.write("D | ");
                     fw.write((curr.getStatus() ? "1" : "0") + " | ");
                     fw.write(curr.getDescriptionWithoutIcon() + " | ");
-                    fw.write(((Deadline) curr).getDeadline().trim());
+                    fw.write(((Deadline) curr).getDeadline());
                 } else if (curr instanceof Event) {
                     fw.write("E | ");
                     fw.write((curr.getStatus() ? "1" : "0") + " | ");
                     fw.write(curr.getDescriptionWithoutIcon() + " | ");
-                    fw.write(((Event) curr).getTime().trim());
+                    fw.write(((Event) curr).getTime());
                 } else {
                     fw.write("T | ");
                     fw.write((curr.getStatus() ? "1" : "0") + " | ");

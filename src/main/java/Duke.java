@@ -30,7 +30,7 @@ public class Duke {
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            taskList = new TaskList();
+            System.out.println(e);
         }
     }
 

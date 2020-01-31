@@ -1,2 +1,3 @@
-T | 0 | sleep
-E | 0 | apply NOC | 
+E | 0 | sleep | tmr
+E | 0 | meet orbital prof | Jan 31 2020
+D | 0 | submit IP | 

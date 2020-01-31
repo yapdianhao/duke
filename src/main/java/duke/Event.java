@@ -34,6 +34,9 @@ public class Event extends Task {
      * @return A string denoting the event's time.
      */
     public String getTime() {
+        if (this.at.equals("")) {
+            return this.todoDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        }
         return this.at;
     }
 

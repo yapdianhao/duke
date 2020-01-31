@@ -1,16 +1,26 @@
 import duke.TaskList;
 import duke.Task;
-import java.util.List;
-import java.util.ArrayList;
+import duke.InvalidIndexException;
 
+/**
+ * A class that tests the TaskList class.
+ */
 class TaskListTest {
 
-    public static void main(String[] args) {
+    /**
+     * Test class driver function.
+     * @param args Command line arguments.
+     */
+    public static void main(String[] args) throws InvalidIndexException{
         TaskList testTaskList = new TaskList();
         testTaskListAdd(testTaskList);
         testTaskListDone(testTaskList);
     }
 
+    /**
+     * Tests the adding function of the TaskList.
+     * @param testTaskList the TaskList that needs to be tested.
+     */
     static void testTaskListAdd(TaskList testTaskList) {
         for (int i = 0; i < 10; i++) {
             Task testTask = new Task("test case " + i);
@@ -19,7 +29,12 @@ class TaskListTest {
         System.out.println(testTaskList.list());
     }
 
-    static void testTaskListDone(TaskList testTaskList) {
+    /**
+     * Tests the done function of the TaskList.
+     * @param testTaskList the TaskList that needs to be tested.
+     * @throws InvalidIndexException the invalid index to delete.
+     */
+    static void testTaskListDone(TaskList testTaskList) throws InvalidIndexException {
         for (int i = 0; i < 10; i++) {
             testTaskList.done(i + 1);
         }

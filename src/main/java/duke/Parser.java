@@ -1,5 +1,6 @@
 package duke;
 import java.util.List;
+import java.util.Arrays;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -132,7 +133,7 @@ public class Parser {
      * @param storedTasks The list of task to load with.
      */
     public void processInputFromFile(String line, List<Task> storedTasks) {
-        String[] split = line.split(" | ");
+        String[] split = line.split("\\ \\|\\ ");
         String type = split[0];
         switch (type) {
             case "T":
@@ -162,6 +163,7 @@ public class Parser {
                 }
                 break;
             case "D":
+                System.out.println("Parser 166: " + Arrays.toString(split));
                 String deadlineTime = split[3];
                 String deadlineDescription = split[2];
                 int deadlineStatus = Integer.parseInt(split[1]);
