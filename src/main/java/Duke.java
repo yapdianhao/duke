@@ -2,6 +2,10 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.DukeException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * CS2103T AY 19/20 S2
@@ -13,7 +17,8 @@ import duke.DukeException;
  * for people who love to procrastinate. Or procrastinate to procrastinate.
  * </p>
  */
-public class Duke {
+
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList taskList;
@@ -24,6 +29,11 @@ public class Duke {
      * Duke is able to perform CRUD operations (Create, Read, Update, Destroy) to manage tasks.
      * @param filePath A text file which functions as a database to store all tasks.
      */
+
+    public Duke() {
+
+    }
+
     public Duke(String filePath) {
         this.ui = new Ui();
         storage = new Storage(filePath);
@@ -32,6 +42,14 @@ public class Duke {
         } catch (DukeException e) {
             System.out.println(e);
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     /**
