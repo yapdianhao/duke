@@ -28,8 +28,8 @@ import javafx.scene.image.ImageView;
 
 public class Duke extends Application {
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/cuteuser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/cutebot!.png"));
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -38,6 +38,9 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    private String filepath;
+
+
 
     /**
      * Constructor of the Duke chatbot assistant.
@@ -46,7 +49,14 @@ public class Duke extends Application {
      */
 
     public Duke() {
-
+        this.filepath = "data/duke.txt";
+        this.ui = new Ui();
+        this.storage = new Storage(this.filepath);
+        try {
+            taskList = new TaskList(storage.load());
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
     }
 
     public Duke(String filePath) {
@@ -108,17 +118,16 @@ public class Duke extends Application {
 
         //step3
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
     }
 
     private Label getDialogLabel(String text) {
@@ -130,20 +139,43 @@ public class Duke extends Application {
     }
 
     /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user)),
+                new DialogBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        return run();
+    }
+
+    /**
      * Starts the Duke bot by receiving user input, and stores all the data to the database
      * upon shutting down.
      */
-    public void run() {
-        ui.start(this.taskList);
+    public String run() {
+        String toReturn = ui.start(this.taskList);
         storage.write(this.taskList.getAllTasks());
-        ui.end();
+        return toReturn;
     }
 
     /**
      * The main driver function of Duke.
      * @param args The command line arguments entered by the user.
      */
-    //public static void main(String[] args) {
-       // new Duke("data/duke.txt").run();
-   // }
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
+    }
 }

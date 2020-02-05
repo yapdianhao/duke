@@ -30,23 +30,22 @@ public class Ui {
      * when the user wishes to.
      * @param taskList
      */
-    public void start(TaskList taskList) {
+    public String start(TaskList taskList) {
         showLine();
         while (true){
             try {
                 String command = sc.nextLine().trim();
                 String output = parser.processCommand(command, taskList);
                 if (!output.equals("")) {
-                    System.out.println(output);
+                    return output;
                 }
                 showLine();
             } catch (DukeTerminateException e) {
-                System.out.println("Bye");
-                return;
+                return "Bye! See you again!";
             } catch (InvalidInputException e) {
-                System.out.println(e);
+                return e.toString();
             } catch (DukeException e) {
-                System.out.println(e);
+                return e.toString();
             }
         }
     }
