@@ -147,8 +147,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
     }
@@ -158,15 +158,15 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return run();
+        return run(input);
     }
 
     /**
      * Starts the Duke bot by receiving user input, and stores all the data to the database
      * upon shutting down.
      */
-    public String run() {
-        String toReturn = ui.start(this.taskList);
+    public String run(String input) {
+        String toReturn = ui.start(this.taskList, input);
         storage.write(this.taskList.getAllTasks());
         return toReturn;
     }
@@ -176,6 +176,6 @@ public class Duke extends Application {
      * @param args The command line arguments entered by the user.
      */
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        //new Duke("data/duke.txt").run();
     }
 }
