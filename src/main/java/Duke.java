@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.application.Platform;
 
 /**
  * CS2103T AY 19/20 S2
@@ -69,7 +70,6 @@ public class Duke extends Application {
         }
     }
 
-    @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -171,11 +171,4 @@ public class Duke extends Application {
         return toReturn;
     }
 
-    /**
-     * The main driver function of Duke.
-     * @param args The command line arguments entered by the user.
-     */
-    public static void main(String[] args) {
-        //new Duke("data/duke.txt").run();
-    }
 }
