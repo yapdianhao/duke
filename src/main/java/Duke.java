@@ -50,7 +50,7 @@ public class Duke extends Application {
      */
 
     public Duke() {
-        this.filepath = "data/duke.txt";
+        this.filepath = "duke.txt";
         this.ui = new Ui();
         this.storage = new Storage(this.filepath);
         try {
