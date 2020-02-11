@@ -1,6 +1,7 @@
 package duke;
+import duke.exceptions.*;
+
 import java.util.List;
-import java.util.Arrays;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -23,7 +24,6 @@ public class Parser {
      * @param command The string of command entered by the user.
      * @param taskList The TaskList to process CRUD operations based on user input.
      * @return An output denoting the success / failure of an operation.
-     * @throws DukeTerminateException Shuts down the Duke by entering "bye".
      * @throws InsufficientInputException Not enough to arguments to find/delete/done.
      * @throws InvalidIndexException Wrong indexes from TaskList's delete and done operations.
      * @throws InvalidTodoException Invalid format of Task entered by the user.
@@ -31,101 +31,148 @@ public class Parser {
      * @throws InvalidDeadlineException Invalid format of Deadline entered by the user.
      * @throws InvalidInputException Invalid commands entered by the user.
      */
-    public String processCommand(String command, TaskList taskList) throws DukeTerminateException,
-            InsufficientInputException, InvalidIndexException, InvalidTodoException, InvalidEventException, InvalidDeadlineException,
+    public String processCommand(String command, TaskList taskList) throws
+            InsufficientInputException,
+            InvalidIndexException,
+            InvalidTodoException,
+            InvalidEventException,
+            InvalidDeadlineException,
             InvalidInputException {
-        String output = "";
-        if (command.equals("bye")) { // exit
-                throw new DukeTerminateException();
+            if (command.equals("bye")) { // exit
+                // refactor this
+                return processParsedCommand(command, taskList);
             } else if (command.equals("list")) {
-                output = taskList.list();
+                // refactor list
+                return processParsedCommand(command, taskList);
             } else if (command.split(" ")[0].equals("find")) { //find
-                if (command.split(" ").length < 2) {
-                    throw new InsufficientInputException();
-                }
-                String key = command.split(" ")[1].trim();
-                output = taskList.find(key);
+                // refactor this
+                command = command.split(" ")[0];
+                return processParsedCommand(command, taskList);
             } else if (command.split(" ")[0].equals("done")) { // done
-                if (command.split(" ").length < 2) {
-                    throw new InsufficientInputException();
-                }
-                int idx = Integer.parseInt(command.split(" ")[1]) - 1;
-                output = taskList.done(idx);
+                //refactor this
+                command = command.split(" ")[0];
+                return processParsedCommand(command, taskList);
             } else if (command.split(" ")[0].equals("delete")) { // delete
-                if (command.split(" ").length < 2) {
-                    throw new InsufficientInputException();
-                }
-                int idx = Integer.parseInt(command.split(" ")[1]) - 1;
-                output = taskList.delete(idx);
+                //refactor this
+                command = command.split(" ")[0];
+                return processParsedCommand(command, taskList);
             } else if (command.split(" ")[0].equals("todo")) { // add todo
-                if (command.split(" ").length < 2) {
-                    throw new InvalidTodoException();
-                }
-                command = command.substring(command.split(" ")[0].length() + 1, command.length());
-                Task task = new Task(command);
-                output = taskList.addTask(task);
+                command = command.split(" ")[0];
+                return processParsedCommand(command, taskList);
             } else if (command.split(" ")[0].equals("deadline")) { // add deadline
-                command = command.substring(command.split(" ")[0].length() + 1, command.length()).trim();
-                if (command.split("/by").length == 0) {
-                    throw new InvalidDeadlineException("OOPS! The description and time is missing. " +
-                            "Format: description /by time");
-                } else if (command.split("/by").length == 1) {
-                    if (command.split("/by")[0].equals("")) {
-                        throw new InvalidEventException("OOPS! The description and time is missing. " +
-                                "Format: description /by time");
-                    } else {
-                        throw new InvalidEventException("OOPS! The time is missing. " +
-                                "Format: description /by time");
-                    }
-                } else if (command.split("/by").length == 2) {
-                    if (command.split("/by")[0].equals("")) {
-                        throw new InvalidDeadlineException("OOPS! The description is missing. " +
-                                "Format: description /by time");
-                    }
-                }
-                String name = command.split(" /by")[0].trim();
-                String time = command.split(" /by")[1].trim();
-                if (isValidDate(time)) {
-                    LocalDate todoDate = LocalDate.parse(time);
-                    Deadline deadline = new Deadline(name, todoDate);
-                    output = taskList.addDeadline(deadline);
-                } else {
-                    Deadline deadline = new Deadline(name, time);
-                    output = taskList.addDeadline(deadline);
-                }
+                command = command.split(" ")[0];
+                return processParsedCommand(command, taskList);
             } else if (command.split(" ")[0].equals("event")) { // add event
-                command = command.substring(command.split(" ")[0].length() + 1, command.length()).trim();
-                if (command.split("/at").length == 0) {
-                    throw new InvalidEventException("OOPS! The description and time is missing. " +
-                            "Format: description /at time");
-                } else if (command.split("/at").length == 1) {
-                    if (command.split("/at")[0].equals("")) {
-                        throw new InvalidEventException("OOPS! The description and time is missing. " +
-                                "Format: description /at time");
-                    } else {
-                        throw new InvalidEventException("OOPS! The time is missing. " +
-                                "Format: description /at time");
-                    }
-                } else if (command.split("/at").length == 2) {
-                    if (command.split("/at")[0].equals("")) {
-                        throw new InvalidEventException("OOPS! The description is missing.");
-                    }
-                }
-                String name = command.split(" /at")[0].trim();
-                String time = command.split(" /at")[1].trim();
-                if (isValidDate(time)) {
-                    LocalDate todoDate = LocalDate.parse(time);
-                    Event event = new Event(name, todoDate);
-                    output = taskList.addEvent(event);
-                } else {
-                    Event event = new Event(name, time);
-                    output = taskList.addEvent(event);
-                }
+                command = command.split(" ")[0];
+                return processParsedCommand(command, taskList);
             } else {
                 throw new InvalidInputException();
             }
-        return output;
-        }
+    }
+
+    public String processParsedCommand(String command, TaskList taskList) throws
+            InsufficientInputException,
+            InvalidIndexException,
+            InvalidTodoException,
+            InvalidEventException,
+            InvalidDeadlineException,
+            InvalidInputException  {
+            int idx;
+            String name;
+            String time;
+            switch (command) {
+                case "bye":
+                    return "Bye! See you again!";
+                case "list":
+                    return taskList.list();
+                case "find":
+                    if (command.split(" ").length < 2) {
+                        throw new InsufficientInputException();
+                    }
+                    String key = command.split(" ")[1].trim();
+                    return taskList.find(key);
+                case "done":
+                    if (command.split(" ").length < 2) {
+                        throw new InsufficientInputException();
+                    }
+                    idx = Integer.parseInt(command.split(" ")[1]) - 1;
+                    return taskList.done(idx);
+                case "delete":
+                    if (command.split(" ").length < 2) {
+                        throw new InsufficientInputException();
+                    }
+                    idx = Integer.parseInt(command.split(" ")[1]) - 1;
+                    return taskList.delete(idx);
+                case "todo":
+                    if (command.split(" ").length < 2) {
+                        throw new InvalidTodoException();
+                    }
+                    command = command.substring(command.split(" ")[0].length() + 1, command.length());
+                    Task task = new Task(command);
+                    return taskList.addTask(task);
+                case "deadline":
+                    command = command.substring(command.split(" ")[0].length() + 1, command.length()).trim();
+                    if (command.split("/by").length == 0) {
+                        throw new InvalidDeadlineException("OOPS! The description and time is missing. " +
+                                "Format: description /by time");
+                    } else if (command.split("/by").length == 1) {
+                        if (command.split("/by")[0].equals("")) {
+                            throw new InvalidEventException("OOPS! The description and time is missing. " +
+                                    "Format: description /by time");
+                        } else {
+                            throw new InvalidEventException("OOPS! The time is missing. " +
+                                    "Format: description /by time");
+                        }
+                    } else if (command.split("/by").length == 2) {
+                        if (command.split("/by")[0].equals("")) {
+                            throw new InvalidDeadlineException("OOPS! The description is missing. " +
+                                    "Format: description /by time");
+                        }
+                    }
+                    name = command.split(" /by")[0].trim();
+                    time = command.split(" /by")[1].trim();
+                    if (isValidDate(time)) {
+                        LocalDate todoDate = LocalDate.parse(time);
+                        Deadline deadline = new Deadline(name, todoDate);
+                        return taskList.addDeadline(deadline);
+                    } else {
+                        Deadline deadline = new Deadline(name, time);
+                        return taskList.addDeadline(deadline);
+                    }
+                case "event":
+                    command = command.substring(command.split(" ")[0].length() + 1, command.length()).trim();
+                    if (command.split("/at").length == 0) {
+                        throw new InvalidEventException("OOPS! The description and time is missing. " +
+                                "Format: description /at time");
+                    } else if (command.split("/at").length == 1) {
+                        if (command.split("/at")[0].equals("")) {
+                            throw new InvalidEventException("OOPS! The description and time is missing. " +
+                                    "Format: description /at time");
+                        } else {
+                            throw new InvalidEventException("OOPS! The time is missing. " +
+                                    "Format: description /at time");
+                        }
+                    } else if (command.split("/at").length == 2) {
+                        if (command.split("/at")[0].equals("")) {
+                            throw new InvalidEventException("OOPS! The description is missing.");
+                        }
+                    }
+                    name = command.split(" /at")[0].trim();
+                    time = command.split(" /at")[1].trim();
+                    if (isValidDate(time)) {
+                        LocalDate todoDate = LocalDate.parse(time);
+                        Event event = new Event(name, todoDate);
+                        return taskList.addEvent(event);
+                    } else {
+                        Event event = new Event(name, time);
+                        return taskList.addEvent(event);
+                    }
+                default:
+                    throw new InvalidInputException();
+            }
+
+    }
+
 
     /**
      * Process tasks from the database to a list.

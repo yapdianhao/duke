@@ -1,4 +1,4 @@
-package duke;
+package duke.exceptions;
 
 /**
  * A Duke exception that warns users when entering invalid commands.

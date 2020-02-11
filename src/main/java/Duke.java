@@ -1,7 +1,7 @@
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.DukeException;
+import duke.exceptions.DukeException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.application.Platform;
 
 /**
  * CS2103T AY 19/20 S2
@@ -26,7 +25,6 @@ import javafx.application.Platform;
  * for people who love to procrastinate. Or procrastinate to procrastinate.
  * </p>
  */
-
 public class Duke extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/cuteuser.png"));
@@ -48,7 +46,6 @@ public class Duke extends Application {
      * Duke is able to perform CRUD operations (Create, Read, Update, Destroy) to manage tasks.
      * @param filePath A text file which functions as a database to store all tasks.
      */
-
     public Duke() {
         this.filepath = "duke.txt";
         this.ui = new Ui();
@@ -158,17 +155,8 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return run(input);
-    }
-
-    /**
-     * Starts the Duke bot by receiving user input, and stores all the data to the database
-     * upon shutting down.
-     */
-    public String run(String input) {
         String toReturn = ui.start(this.taskList, input);
         storage.write(this.taskList.getAllTasks());
         return toReturn;
     }
-
 }

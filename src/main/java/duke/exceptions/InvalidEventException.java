@@ -1,4 +1,4 @@
-package duke;
+package duke.exceptions;
 
 /**
  * A Duke exception that warns users that the event format is invalid.

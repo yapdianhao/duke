@@ -1,4 +1,4 @@
-package duke;
+package duke.exceptions;
 
 /**
  * A Duke exception to warn users that deadline format are invalid.

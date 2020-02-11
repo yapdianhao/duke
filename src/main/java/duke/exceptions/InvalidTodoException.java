@@ -1,4 +1,4 @@
-package duke;
+package duke.exceptions;
 
 /**
  * A Duke exception to warn the users when creating invalid tasks.

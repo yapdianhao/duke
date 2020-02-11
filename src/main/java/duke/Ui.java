@@ -1,4 +1,8 @@
 package duke;
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeTerminateException;
+import duke.exceptions.InvalidInputException;
+
 import java.util.Scanner;
 
 /**
@@ -36,8 +40,7 @@ public class Ui {
         try {
             String command = input.trim();
             output = parser.processCommand(command, taskList);
-            } catch (DukeTerminateException e) {
-                output = "Bye! See you again!";
+
             } catch (InvalidInputException e) {
                 output =  e.toString();
             } catch (DukeException e) {

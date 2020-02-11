@@ -1,4 +1,6 @@
 package duke;
+import duke.exceptions.InvalidIndexException;
+
 import java.util.List;
 import java.util.ArrayList;
 

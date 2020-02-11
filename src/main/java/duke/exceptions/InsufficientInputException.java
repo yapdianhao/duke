@@ -1,4 +1,4 @@
-package duke;
+package duke.exceptions;
 
 /**
  * A Duke Exception which warns the users that arguments are not enough.
