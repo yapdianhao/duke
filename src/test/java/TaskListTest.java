@@ -1,6 +1,6 @@
 import duke.TaskList;
 import duke.Task;
-import duke.InvalidIndexException;
+import duke.exceptions.InvalidIndexException;
 
 /**
  * A class that tests the TaskList class.
