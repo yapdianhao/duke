@@ -40,28 +40,12 @@ public class Duke extends Application {
     private TaskList taskList;
     private Ui ui;
     private String filepath;
+    //static final String filePath;
 
-
-    /**
-     * Constructor of the Duke chatbot assistant.
-     * Duke is able to perform CRUD operations (Create, Read, Update, Destroy) to manage tasks.
-     *
-     * @param filePath A text file which functions as a database to store all tasks.
-     */
     public Duke() {
         this.filepath = "duke.txt";
         this.ui = new Ui();
         this.storage = new Storage(this.filepath);
-        try {
-            taskList = new TaskList(storage.load());
-        } catch (DukeException e) {
-            System.out.println(e);
-        }
-    }
-
-    public Duke(String filePath) {
-        this.ui = new Ui();
-        storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
