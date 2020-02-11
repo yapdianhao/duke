@@ -40,7 +40,6 @@ public class Ui {
         try {
             String command = input.trim();
             output = parser.processCommand(command, taskList);
-
             } catch (InvalidInputException e) {
                 output =  e.toString();
             } catch (DukeException e) {
