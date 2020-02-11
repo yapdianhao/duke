@@ -14,10 +14,12 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.application.Platform;
 
 /**
  * CS2103T AY 19/20 S2
  * Individual Project
+ *
  * @author Yap Dian Hao
  * @since 2020-01-30
  * <p>
@@ -40,10 +42,10 @@ public class Duke extends Application {
     private String filepath;
 
 
-
     /**
      * Constructor of the Duke chatbot assistant.
      * Duke is able to perform CRUD operations (Create, Read, Update, Destroy) to manage tasks.
+     *
      * @param filePath A text file which functions as a database to store all tasks.
      */
     public Duke() {
@@ -110,7 +112,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //step3
@@ -124,7 +126,6 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
     }
 
     private Label getDialogLabel(String text) {
@@ -147,6 +148,10 @@ public class Duke extends Application {
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
+        if (dukeText.getText().equals("Bye! See you again!")) {
+            Platform.exit();
+            System.exit(0);
+        }
         userInput.clear();
     }
 

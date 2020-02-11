@@ -1,5 +1,11 @@
 package duke;
-import duke.exceptions.*;
+
+import duke.exceptions.InvalidInputException;
+import duke.exceptions.InsufficientInputException;
+import duke.exceptions.InvalidEventException;
+import duke.exceptions.InvalidIndexException;
+import duke.exceptions.InvalidDeadlineException;
+import duke.exceptions.InvalidTodoException;
 
 import java.util.List;
 import java.time.LocalDate;
