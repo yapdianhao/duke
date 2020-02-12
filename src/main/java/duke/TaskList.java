@@ -74,7 +74,8 @@ public class TaskList {
      * Shows all the tasks, including those that are done or incomplete, to the user.
      * @return A string that includes every task.
      */
-    public String list() {
+    public String list()  {
+        assert this.tasks.size() > 0 : "No pending tasks!";
         String res = "";
         for (int i = 0; i < this.tasks.size(); i++) {
             res += (i + 1) + "." + this.tasks.get(i);

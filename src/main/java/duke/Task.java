@@ -29,6 +29,7 @@ public class Task {
      * A setter method for the task. Sets the task as done.
      */
     public void setDone() {
+        assert !getStatus(): "task already done";
         this.isDone = true;
     }
 

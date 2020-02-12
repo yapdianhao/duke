@@ -45,6 +45,7 @@ public class Parser {
             InvalidEventException,
             InvalidDeadlineException,
             InvalidInputException {
+        assert !command.equals("shit") || !command.equals("shut up") : "Please don't be rude to me TT";
         if (command.equals("bye")) { // exit
             return processParsedCommand(command, taskList);
         } else if (command.equals("list")) {
@@ -163,6 +164,7 @@ public class Parser {
             InvalidEventException,
             InvalidDeadlineException,
             InvalidInputException {
+        assert command != null || !command.equals(" ") : "Command should not be an empty string";
         int idx;
         String front = command.split(" ")[0];
         switch (front) {
