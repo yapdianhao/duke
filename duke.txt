@@ -1,3 +1,1 @@
-T | 0 | sleep
-T | 1 | eat
-T | 0 | fix bug
+T | 1 | sleep

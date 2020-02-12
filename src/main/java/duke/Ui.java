@@ -1,4 +1,5 @@
 package duke;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeTerminateException;
 import duke.exceptions.InvalidInputException;
@@ -32,6 +33,7 @@ public class Ui {
     /**
      * Starts the UI. The UI will continue to receive inputs, and terminates
      * when the user wishes to.
+     *
      * @param taskList
      */
     public String start(TaskList taskList, String input) {
@@ -40,14 +42,15 @@ public class Ui {
         try {
             String command = input.trim();
             output = parser.processCommand(command, taskList);
-            } catch (InvalidInputException e) {
-                output =  e.toString();
-            } catch (DukeException e) {
-                output = e.toString();
-            } finally {
-                return output;
-            }
+        } catch (InvalidInputException e) {
+            output = e.toString();
+        } catch (DukeException e) {
+            output = e.toString();
+        } finally {
+            return output;
+        }
     }
+
     /**
      * Prints a horizontal line.
      */
