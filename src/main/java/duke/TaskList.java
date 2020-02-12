@@ -34,6 +34,9 @@ public class TaskList {
      * @return An output specifying how many tasks the user has, after the adding.
      */
     public String addTask (Task task) {
+        if (hasDuplicateTask(task)) {
+            return "This task has been added!";
+        }
         this.tasks.add(task);
         String res = "Got it. I've added this task:" + "\n";
         res += task + "\n";
@@ -42,12 +45,48 @@ public class TaskList {
         return res;
     }
 
+    private boolean hasDuplicateTask(Task task) {
+        for (Task added : this.tasks) {
+            if (added.getDescriptionWithoutIcon().equals(task.getDescriptionWithoutIcon())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean hasDuplicateDeadline(Deadline deadline) {
+        for (Task added : this.tasks) {
+            if (added instanceof Deadline) {
+                if (added.getDescriptionWithoutIcon().equals(deadline.getDescriptionWithoutIcon())
+                        && ((Deadline) added).getDeadline().equals(deadline.getDeadline())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean hasDuplicateEvent(Event event) {
+        for (Task added : this.tasks) {
+            if (added instanceof Event) {
+                if (added.getDescriptionWithoutIcon().equals(event.getDescriptionWithoutIcon())
+                        && ((Event) added).getTime().equals(event.getTime())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * Adds a deadline to the current list.
      * @param deadline The deadline that needs to be added into the list.
      * @return An output specifying how many tasks the user has, after the adding.
      */
     public String addDeadline(Deadline deadline) {
+        if (hasDuplicateDeadline(deadline)) {
+            return "This deadline is already added!";
+        }
         this.tasks.add(deadline);
         String res = "Got it. I've added this deadline:" + "\n";
         res += deadline + "\n";
@@ -62,6 +101,9 @@ public class TaskList {
      * @return An output specifying how many tasks the user has, after the adding.
      */
     public String addEvent(Event event) {
+        if (hasDuplicateEvent(event)) {
+            return "This event is already added!";
+        }
         this.tasks.add(event);
         String res = "Got it. I've added this deadline:" + "\n";
         res += event + "\n";
