@@ -42,7 +42,6 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        System.out.println(new DialogBox(text, img));
         return new DialogBox(text, img);
     }
 
