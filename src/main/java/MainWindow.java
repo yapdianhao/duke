@@ -32,6 +32,9 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        String startText = "Hello! I am Duke. What can I do for you?";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(startText, dukeImage));
     }
 
     /**
@@ -40,9 +43,11 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        //String startText = "Hello! I am Duke. What can I do for you?";
         String userText = userInput.getText();
         String dukeText = duke.getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
+                //DialogBox.getDukeDialog(startText, dukeImage),
                 DialogBox.getUserDialog(userText, userImage),
                 DialogBox.getDukeDialog(dukeText, dukeImage)
         );
