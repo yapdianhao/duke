@@ -51,6 +51,10 @@ public class Ui {
         }
     }
 
+    public String getInput() {
+        return this.sc.nextLine();
+    }
+
     /**
      * Prints a horizontal line.
      */
