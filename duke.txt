@@ -1,7 +1,7 @@
 T | 1 | sleep
 T | 1 | tutorial
 D | 0 | complete ip | tonight
-T | 0 | x
+T | 1 | x
 T | 0 | y
-T | 0 | z
+T | 1 | z
 T | 0 | eat
