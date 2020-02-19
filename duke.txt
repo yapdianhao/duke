@@ -2,3 +2,4 @@ T | 0 | sleep
 E | 0 | meeting with orbital prof | friday
 D | 0 | complete ip | Feb 21 2020
 E | 0 | jel's birthday | Mar 19 2020
+T | 0 | print CS2103T textbook

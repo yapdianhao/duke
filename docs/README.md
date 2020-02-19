@@ -62,5 +62,16 @@ Expected outcome:
 
 <img height="300" src="./images/list.jpg" width="450">
 
+### `todo <task description>` - Creates a new todo task.
+
+A todo is a task which contains only the description, and its 
+completion status.
+
+Example of usage: 
+`todo print CS2103T textbook`
+
+Expected outcome:
+
+<img height="300" src="./images/todo.jpg" width="450">
 
 
