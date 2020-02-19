@@ -60,5 +60,5 @@ Example of usage:
 
 Expected outcome:
 
-![list](/images/list.jpg)
+![list](./images/list.jpg)
 
