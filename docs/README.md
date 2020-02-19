@@ -18,7 +18,7 @@ For first time users, enter "start" for a tutorial.
 Tasks can be further categorized into deadlines and events, 
 each with a specific format. 
 
-###Feature 2: Show tasks
+### Feature 2: Show tasks
 To ease the user in deciding what to do, duke is able to show a series
 of tasks created chronologically to the user. Each task is shown with its
 description, the status of completion, and the time to complete if the task
@@ -62,7 +62,7 @@ Example of usage:
 
 Expected outcome:
 
-<img height="300" src="./images/list.jpg" width="475">
+<img height="300" src="./images/start.jpg" width="475">
 
 ### `list` - Shows a list of current pending tasks.
  
