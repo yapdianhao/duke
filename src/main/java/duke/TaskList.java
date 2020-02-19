@@ -142,7 +142,7 @@ public class TaskList {
             }
         }
         for (int i = 0; i < filteredTasks.size(); i++) {
-            res += (i + 1) + "." + filteredTasks.get(i);
+            res += (i + 1) + "." + filteredTasks.get(i) + "\n";
         }
         return res;
     }

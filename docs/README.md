@@ -103,3 +103,14 @@ Expected outcome:
 <img height="300" src="./images/event-time.jpg" width="475">
 <img height="300" src="./images/event-any.jpg" width="475">
 
+### `find <keyword>` - Locates all relevant tasks.
+
+Users can filter tasks by selecting a keyword to search.
+
+Example of usage:
+`find textbook`
+
+Expected outcome:
+
+<img height="300" src="./images/find.jpg" width="475">
+
