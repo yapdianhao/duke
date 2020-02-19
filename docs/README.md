@@ -62,7 +62,7 @@ Example of usage:
 
 Expected outcome:
 
-<img height="350" src="./images/start.jpg" width="475">
+<img height="400" src="./images/start.jpg" width="475">
 
 ### `list` - Shows a list of current pending tasks.
  
