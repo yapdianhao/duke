@@ -108,6 +108,7 @@ Expected outcome:
 Users can filter tasks by selecting a keyword to search.
 
 Example of usage:
+
 `find textbook`
 
 Expected outcome:
@@ -120,6 +121,7 @@ Users can delete tasks after completing that task or that task's
 deadline is over.
 
 Example of usage:
+
 `delete 1`
 
 Expected outcome:
@@ -131,11 +133,25 @@ Expected outcome:
 Users can mark certain tasks as done upon completion.
 
 Example of usage:
+
 `done 2`
 
 Expected outcome:
 
 <img height="300" src="./images/done.jpg" width="475">
+
+### `bye` - Closes the duke.
+
+Users can exit the application by greeting the duke goodbye.
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+Exits the application.
+
 
 
 
