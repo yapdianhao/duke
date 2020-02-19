@@ -60,7 +60,7 @@ Example of usage:
 
 Expected outcome:
 
-<img height="300" src="./images/list.jpg" width="400">
+<img height="300" src="./images/list.jpg" width="450">
 
 
 
