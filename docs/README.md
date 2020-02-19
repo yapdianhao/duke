@@ -74,7 +74,7 @@ Expected outcome:
 
 <img height="300" src="./images/todo.jpg" width="475">
 
-### 'deadline <deadline description> /by <deadline>' - Creates a new deadline.
+### `deadline <deadline description> /by <deadline>` - Creates a new deadline.
 
 A deadline is a task that needs to be done before the specified time.
 The time can be in any valid time phrase, or a format with YYYY-MM-DD.
