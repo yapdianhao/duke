@@ -74,4 +74,18 @@ Expected outcome:
 
 <img height="300" src="./images/todo.jpg" width="475">
 
+### 'deadline <task description> /by <task deadline>' - Creates a new deadline.
+
+A deadline is a task that needs to be done before the specified time.
+The time can be in any valid time phrase, or a format with YYYY-MM-DD.
+
+Example of usage:
+
+`deadline CS3230 assignment /by 2020-03-06` or 
+`deadline CS3230 assignment /by next week`
+
+Expected outcome:
+
+<img height="300" src="./images/deadline-time.jpg" width="475">
+<img height="300" src="./images/deadline-any.jpg" width="475">
 
