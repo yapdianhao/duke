@@ -114,8 +114,7 @@ Expected outcome:
 
 <img height="300" src="./images/find.jpg" width="475">
 
-### `done <index number of task to delete>` - Deletes the current
-task at that index.
+### `delete <index number of task to delete>` - Deletes the current task at that index.
 
 Users can delete tasks after completing that task or that task's 
 deadline is over.
@@ -126,5 +125,17 @@ Example of usage:
 Expected outcome:
 
 <img height="300" src="./images/delete.jpg" width="475">
+
+### `done <index number of task to set done>` - Sets the task at that index to be completed.
+
+Users can mark certain tasks as done upon completion.
+
+Example of usage:
+`done 2`
+
+Expected outcome:
+
+<img height="300" src="./images/done.jpg" width="475">
+
 
 
