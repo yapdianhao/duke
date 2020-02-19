@@ -60,7 +60,7 @@ Example of usage:
 
 Expected outcome:
 
-<img height="300" src="./images/list.jpg" width="450">
+<img height="300" src="./images/list.jpg" width="500">
 
 ### `todo <task description>` - Creates a new todo task.
 
@@ -72,6 +72,6 @@ Example of usage:
 
 Expected outcome:
 
-<img height="300" src="./images/todo.jpg" width="450">
+<img height="300" src="./images/todo.jpg" width="500">
 
 
