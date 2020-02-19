@@ -74,7 +74,7 @@ Expected outcome:
 
 <img height="300" src="./images/todo.jpg" width="475">
 
-### 'deadline <task description> /by <task deadline>' - Creates a new deadline.
+### 'deadline <deadline description> /by <deadline>' - Creates a new deadline.
 
 A deadline is a task that needs to be done before the specified time.
 The time can be in any valid time phrase, or a format with YYYY-MM-DD.
@@ -88,4 +88,18 @@ Expected outcome:
 
 <img height="300" src="./images/deadline-time.jpg" width="475">
 <img height="300" src="./images/deadline-any.jpg" width="475">
+
+### `event <event description> /at <time>` - Creates a new event.
+
+An event is a task that is taking place at the specified time. The time 
+can be in any valid time phrase, or a format with YYYY-MM-DD.
+
+Example of usage:
+`event CS3243 midterm /at 2020=03-07` or 
+`event CS3243 midterm /at March`
+
+Expected outcome:
+
+<img height="300" src="./images/event-time.jpg" width="475">
+<img height="300" src="./images/event-any.jpg" width="475">
 
