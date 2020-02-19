@@ -60,5 +60,7 @@ Example of usage:
 
 Expected outcome:
 
-![list](./images/list.jpg)
+<img height="250" src="./images/list.jpg" width="400">
+
+
 
