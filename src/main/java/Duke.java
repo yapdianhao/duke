@@ -21,7 +21,6 @@ public class Duke {
     private TaskList taskList;
     private static Ui ui;
     private String filepath;
-    //static final String filePath;
 
     public Duke() {
         this.filepath = "duke.txt";
