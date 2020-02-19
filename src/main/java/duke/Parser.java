@@ -48,6 +48,8 @@ public class Parser {
         assert !command.equals("shit") || !command.equals("shut up") : "Please don't be rude to me TT";
         if (command.equals("bye")) { // exit
             return processParsedCommand(command, taskList);
+        } else if (command.equals("start")) {
+            return processParsedCommand(command, taskList);
         } else if (command.equals("list")) {
             return processParsedCommand(command, taskList);
         } else if (command.split(" ")[0].equals("find")) { //find
@@ -65,6 +67,18 @@ public class Parser {
         } else {
             throw new InvalidInputException();
         }
+    }
+
+    public String sendHelp() {
+        String bye = "bye\n";
+        String list = "list\n";
+        String find = "find <keyword>\n";
+        String done = "done <index>\n";
+        String delete = "delete <index>\n";
+        String createTask = "task <description>\n";
+        String createDeadline = "deadline <description> /by <deadline>\n";
+        String createEvent = "event <description> /at <time>";
+        return bye + list + find + done + delete + createTask + createDeadline + createEvent;
     }
 
     public String findTask(String command) throws InsufficientInputException {
@@ -170,6 +184,8 @@ public class Parser {
         switch (front) {
             case "bye":
                 return "Bye! See you again!";
+            case "start":
+                return sendHelp();
             case "list":
                 return taskList.list();
             case "find":

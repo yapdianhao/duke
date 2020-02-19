@@ -10,8 +10,11 @@
 * Prevents duplicate tasks
 * Exits Duke
 
-### Feature 1 : Create tasks
+### Feature 0: Learning to use duke
 Duke is a personal chatbot assistant to help you manage your tasks.
+For first time users, enter "start" for a tutorial.
+
+### Feature 1 : Create tasks
 Tasks can be further categorized into deadlines and events, 
 each with a specific format. 
 
@@ -48,6 +51,18 @@ The duke will sent a goodbye message should the user requests to turn it
 off.
 
 ## Usage
+
+### `start` - Shows a list of valid commands.
+
+The duke is able to show a list of valid commands for first time users.
+
+Example of usage:
+
+`start`
+
+Expected outcome:
+
+<img height="300" src="./images/list.jpg" width="475">
 
 ### `list` - Shows a list of current pending tasks.
  
