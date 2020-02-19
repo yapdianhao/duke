@@ -49,14 +49,16 @@ off.
 
 ## Usage
 
-### `todo xxx` - Describe action
-
-Describe action and its outcome.
+### `list` - Shows a list of current pending tasks.
+ 
+The duke not only shows newly created tasks by the user in the current
+session, but also loads previously uncompleted tasks.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`list`
 
 Expected outcome:
 
-`outcome`
+![list](/images/list.jpg)
+
