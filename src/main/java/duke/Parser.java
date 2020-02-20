@@ -50,6 +50,8 @@ public class Parser {
             return processParsedCommand(command, taskList);
         } else if (command.equals("start")) {
             return processParsedCommand(command, taskList);
+        } else if (command.equals("clear")) {
+            return processParsedCommand(command, taskList);
         } else if (command.equals("list")) {
             return processParsedCommand(command, taskList);
         } else if (command.split(" ")[0].equals("find")) { //find
@@ -184,6 +186,8 @@ public class Parser {
         switch (front) {
             case "bye":
                 return "Bye! See you again!";
+            case "clear":
+                return taskList.clear();
             case "start":
                 return sendHelp();
             case "list":

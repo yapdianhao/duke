@@ -1,8 +1,0 @@
-E | 0 | meeting with orbital prof | friday
-D | 1 | complete ip | Feb 21 2020
-E | 0 | jel's birthday | Mar 19 2020
-T | 0 | print CS2103T textbook
-D | 0 | CS3230 assignment | next week
-D | 0 | CS3230 assignment | Mar 6 2020
-E | 0 | CS3243 midterm | Mar 7 2020
-E | 0 | CS3243 midterm | March
