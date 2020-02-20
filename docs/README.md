@@ -44,9 +44,14 @@ record it and remind the user again the next time duke is called.
 ### Feature 7: Prevents duplicate task
 To avoid having the same tasks in the list, duke is equipped with a 
 detector such that he will warn the user if the user attempts to create
-the exact same tas.
+the exact same task.
 
-### Feature 8: Exits Duke
+### Feature 8: Clears tasks
+If users haven't used duke for a while, and all the tasks are no longer 
+invalid, the users can choose to clear all the tasks rather than 
+delete them manually.
+
+### Feature 9: Exits Duke
 The duke will sent a goodbye message should the user requests to turn it
 off.
 
@@ -97,6 +102,7 @@ The time can be in any valid time phrase, or a format with YYYY-MM-DD.
 Example of usage:
 
 `deadline CS3230 assignment /by 2020-03-06` or 
+
 `deadline CS3230 assignment /by next week`
 
 Expected outcome:
@@ -110,7 +116,9 @@ An event is a task that is taking place at the specified time. The time
 can be in any valid time phrase, or a format with YYYY-MM-DD.
 
 Example of usage:
+
 `event CS3243 midterm /at 2020=03-07` or 
+
 `event CS3243 midterm /at March`
 
 Expected outcome:
@@ -155,11 +163,17 @@ Expected outcome:
 
 <img height="300" src="./images/done.jpg" width="475">
 
-### `bye` - Closes the duke.
+### `clear` - Clears all tasks.
 
-Users can exit the application by greeting the duke goodbye.
+Users can delete all their tasks.
 
 Example of usage:
+
+`clear`
+
+Expected outcome:
+
+Empties the list of task.
 
 `bye`
 
