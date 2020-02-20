@@ -73,6 +73,7 @@ public class Parser {
 
     public String sendHelp() {
         String bye = "bye\n";
+        String clear = "clear\n";
         String list = "list\n";
         String find = "find <keyword>\n";
         String done = "done <index>\n";
@@ -80,7 +81,7 @@ public class Parser {
         String createTask = "task <description>\n";
         String createDeadline = "deadline <description> /by <deadline>\n";
         String createEvent = "event <description> /at <time>";
-        return bye + list + find + done + delete + createTask + createDeadline + createEvent;
+        return bye + clear + list + find + done + delete + createTask + createDeadline + createEvent;
     }
 
     public String findTask(String command) throws InsufficientInputException {
